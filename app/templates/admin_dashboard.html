@@ -1,0 +1,122 @@
+<a href="{% url 'edit_form' %}" 
+   style="display:inline-block; margin-bottom: 20px; padding:10px 20px; background:#43a047; color:white; text-decoration:none; border-radius:5px; font-weight:bold; transition: background 0.3s;"
+   onmouseover="this.style.background='#2e7d32'" 
+   onmouseout="this.style.background='#43a047'">
+   EDIT FORM
+</a>
+
+<h2 style="font-family: Arial, sans-serif; color:#2e7d32; text-align:center; margin-bottom:20px;">
+    User Details
+</h2>
+
+<style>
+    table.user-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+        background: white;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    table.user-table th {
+        background: #a5d6a7;
+        color: #1b5e20;
+        padding: 12px;
+        border: 1px solid #c8e6c9;
+        font-size: 16px;
+        text-transform: uppercase;
+    }
+    table.user-table td {
+        padding: 10px;
+        border: 1px solid #c8e6c9;
+        text-align: center;
+        font-size: 14px;
+    }
+    .even-row {
+        background: #f9fff9;
+    }
+    .odd-row {
+        background: #e8f5e9;
+    }
+    .edit-btn {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #43a047;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+        margin-right: 5px;
+        transition: background 0.3s;
+    }
+    .edit-btn:hover {
+        background: #2e7d32;
+    }
+    .delete-btn {
+        display: inline-block;
+        padding: 6px 12px;
+        background: #e53935;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        font-size: 14px;
+        transition: background 0.3s;
+    }
+    .delete-btn:hover {
+        background: #b71c1c;
+    }
+    .unique-button {
+        text-align: center;
+        margin-left: 50%;
+  background-color: #4CAF50; 
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition-duration: 0.4s;
+}
+
+.unique-button:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid #4CAF50;
+}
+</style>
+
+<table class="user-table">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>QR</th>
+        <th>Actions</th>
+    </tr>
+    {% for user in users %}
+    <tr class="{% if forloop.counter|divisibleby:2 %}even-row{% else %}odd-row{% endif %}">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phone }}</td>
+        <td>
+            {% if user.qr_image %}
+                <img src="{{ user.qr_image.url }}" width="100" style="border-radius:5px; border:1px solid #81c784;">
+            {% else %}
+                <span style="color:#757575;">No QR Image</span>
+            {% endif %}
+        </td>
+       
+        <td>
+            <a href="{% url 'edit_user' user.id %}" class="edit-btn">Edit</a>
+            <a href="{% url 'delete_user' user.id %}" class="delete-btn">Delete</a>
+        </td>
+    </tr>
+  
+    {% endfor %}
+      
+</table>
+<button onclick="window.print()" class="unique-button">Export Report</button>
+

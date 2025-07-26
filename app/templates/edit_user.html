@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+</head>
+<body style="font-family: Arial, sans-serif; background: linear-gradient(135deg, #d4fc79, #96e6a1); margin: 0; padding: 0; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh;">
+
+    <div style="background: #fff; margin-top: 40px; padding: 30px 40px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); width: 400px;">
+        <h2 style="text-align: center; color: #2e7d32; font-size: 24px; margin-bottom: 20px;">Edit User</h2>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <label style="display:block; font-weight:bold; margin-bottom:5px; color:#388e3c;">Name:</label>
+            <input type="text" name="name" value="{{ user.name }}" required
+                   style="width:100%; padding:10px; border:1px solid #c8e6c9; border-radius:5px; margin-bottom:15px; font-size:14px;">
+
+            <label style="display:block; font-weight:bold; margin-bottom:5px; color:#388e3c;">Email:</label>
+            <input type="email" name="email" value="{{ user.email }}" required
+                   style="width:100%; padding:10px; border:1px solid #c8e6c9; border-radius:5px; margin-bottom:15px; font-size:14px;">
+
+            <label style="display:block; font-weight:bold; margin-bottom:5px; color:#388e3c;">Phone:</label>
+            <input type="tel" name="phone" value="{{ user.phone }}" required
+                   style="width:100%; padding:10px; border:1px solid #c8e6c9; border-radius:5px; margin-bottom:15px; font-size:14px;">
+
+            <label style="display:block; font-weight:bold; margin-bottom:8px; color:#388e3c;">Current QR:</label>
+            {% if user.qr_image %}
+                <img src="{{ user.qr_image.url }}" width="150" style="display:block; margin-bottom:15px; border-radius:5px; border:1px solid #81c784;">
+            {% else %}
+                <p style="color:#757575; font-size:14px; margin-bottom:15px;">No QR Image</p>
+            {% endif %}
+
+            <label style="display:block; font-weight:bold; margin-bottom:5px; color:#388e3c;">Change QR Image:</label>
+            <input type="file" name="qr_image" style="margin-bottom:20px; font-size:14px;">
+
+            <button type="submit" 
+                    style="width:100%; padding:12px; background:#43a047; color:white; border:none; border-radius:6px; font-size:16px; font-weight:bold; cursor:pointer; transition: background 0.3s;"
+                    onmouseover="this.style.background='#2e7d32'" 
+                    onmouseout="this.style.background='#43a047'">
+                Update
+            </button>
+        </form>
+    </div>
+
+</body>
+</html>

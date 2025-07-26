@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+       body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: linear-gradient(135deg, #d4fc79, #96e6a1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px; /* Add padding to avoid content touching edges */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+}
+
+        .form-wrapper {
+            background: #ffffff;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+            width: 400px;
+            transition: transform 0.3s ease;
+        }
+        .form-wrapper:hover {
+            transform: translateY(-5px);
+        }
+        .form-wrapper h2 {
+            text-align: center;
+            font-size: 26px;
+            color: #2e7d32;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        .form-wrapper h3 {
+            text-align: center;
+            font-size: 16px;
+            color: #388e3c;
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 14px;
+            color: #388e3c;
+            display: block;
+            margin: 12px 0 5px;
+            font-weight: 500;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #c8e6c9;
+            border-radius: 6px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s;
+            background-color: #f9fff9;
+        }
+        input:focus {
+            border-color: #43a047;
+            box-shadow: 0 0 5px rgba(67, 160, 71, 0.4);
+        }
+        .qr-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .qr-section img {
+            width: 150px;
+            height: auto;
+            border: 2px solid #c8e6c9;
+            border-radius: 8px;
+            padding: 5px;
+            background-color: #f1f8e9;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            background: #43a047;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #2e7d32;
+        }
+        .footer-text {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+            color: #558b2f;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-wrapper">
+        <h2>{{ admin_details.course_name|default:"Login Form" }}</h2>
+        <h3>{{ admin_details.date|default:"Date Not Set" }}</h3>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+            <label for="phone">Phone No</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+
+            <div class="qr-section">
+                <a href="{{ admin_details.qr_change.url }}" download>
+                    <img src="{{ admin_details.qr_change.url }}" alt="QR Code">
+                </a>
+                
+            </div>
+
+            <label for="qr">Upload Screenshot</label>
+            <input type="file" id="qr" name="qr" accept="image/*" required>
+
+            <button type="submit">Submit</button>
+        </form>
+        <div class="footer-text">
+            Powered by GK Forms
+        </div>
+        <div class="hide" style="background-color: #2e7d32;height: 50px;visibility: collapse;"><a href="{% url 'admin_dashboard' %}">hello</a></div>
+        
+    </div>
+</body>
+</html>
