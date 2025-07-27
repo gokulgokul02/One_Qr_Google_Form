@@ -12,3 +12,4 @@ Solution:
 I created a form with editable by admin and the admin can fix the course name,date and add a particular amount QR for payment.
 
 
+MAIN AIM IS TO ONE QR ONE FORM FOR ALL EVENTS......
