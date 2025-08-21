@@ -1,6 +1,5 @@
 
 
-you can view my website on below link :https://gokulvr.pythonanywhere.com/
 
 
 Problem:
